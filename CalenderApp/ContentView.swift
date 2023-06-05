@@ -6,16 +6,34 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct ContentView: View {
+    @State private var selectedDate: Date = Date()
+    let calendar = Calendar.current
+    
+    @State var a = 0
+    @State var b = 0
+    @State var c = 0
+    
+
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            CurrentTimeView()
+            
+            DatePicker(
+                "Select a date",
+                selection: $selectedDate,
+                displayedComponents: .date
+            )
+            .datePickerStyle(GraphicalDatePickerStyle())
         }
-        .padding()
+    }
+
+    private var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter
     }
 }
 
